@@ -1,16 +1,58 @@
 #! /bin/bash
 
 IMG_SRC_DIST="//freebox/capture-test/"
-IMG_SRC_LOCAL=`readlink -e "./capture"`
-IMG_WORKING_DIR=`readlink -e "./work-temp"`
+IMG_SRC_LOCAL="./capture"
+IMG_WORKING_DIR="./work-temp"
 VIDEO_IN_MUSIC="//freebox/timelapse/input_music"
-VIDEO_DEST_LOCAL=`readlink -e "./out"`
-VIDEO_DEST_DIST=`readlink -e "//freebox/timelapse"`
+VIDEO_DEST_LOCAL="./out"
+VIDEO_DEST_DIST="//freebox/timelapse"
 
 OUT_FILE_PREFIX="timelapse"
 
+#check directories
+
+if [[ ! -d "$IMG_SRC_DIST" ]]; then
+  echo "IMG_SRC_DIST=$IMG_SRC_DIST is not valid path"
+  exit
+fi
+if [[ ! -d "$IMG_SRC_LOCAL" ]]; then
+  echo "IMG_SRC_LOCAL=$IMG_SRC_LOCAL is not valid path"
+  echo "Creating $IMG_SRC_LOCAL"
+  mkdir -p $IMG_SRC_LOCAL || exit
+fi
+if [[ ! -d "$IMG_WORKING_DIR" ]]; then
+  echo "IMG_WORKING_DIR=$IMG_WORKING_DIR is not valid path"
+  echo "Creating $IMG_WORKING_DIR"
+  mkdir -p $IMG_WORKING_DIR || exit
+
+fi
+if [[ ! -d "$VIDEO_IN_MUSIC" ]]; then
+  echo "VIDEO_IN_MUSIC=$VIDEO_IN_MUSIC is not valid path"
+  exit
+fi
+if [[ ! -d "$VIDEO_DEST_LOCAL" ]]; then
+  echo "VIDEO_DEST_LOCAL=$VIDEO_DEST_LOCAL is not valid path"
+  echo "Creating $VIDEO_DEST_LOCAL"
+  mkdir -p $VIDEO_DEST_LOCAL || exit
+fi
+if [[ ! -d "$VIDEO_DEST_DIST" ]]; then
+  echo "VIDEO_DEST_DIST=$VIDEO_DEST_DIST is not valid path"
+  exit
+fi
+
+#Override variable with canonic path :
+
+IMG_SRC_DIST=`readlink -e "$IMG_SRC_DIST"`
+IMG_SRC_LOCAL=`readlink -e "$IMG_SRC_LOCAL"`
+IMG_WORKING_DIR=`readlink -e "$IMG_WORKING_DIR"`
+VIDEO_IN_MUSIC=`readlink -e "$VIDEO_IN_MUSIC"`
+VIDEO_DEST_LOCAL=`readlink -e "$VIDEO_DEST_LOCAL"`
+VIDEO_DEST_DIST=`readlink -e "$VIDEO_DEST_DIST"`
+
+
+
 #sync files :
-rsync --delete --progress -ar "$IMG_SRC_DIST" "$IMG_SRC_LOCAL"
+rsync --delete --progress -ar "$IMG_SRC_DIST/" "$IMG_SRC_LOCAL"
 
 #copy temp and rename
 
