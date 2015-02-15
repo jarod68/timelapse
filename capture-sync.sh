@@ -13,10 +13,17 @@ function sync {
 	rsync --progress --recursive --times --remove-source-files "$REAL_LOCAL_PATH/" "$REAL_DISTANT_PATH"
 }
 
+function clean {
+	echo "Cleaning $REAL_DISTANT_PATH"
+	./distant-cleaner.sh
+
+}
+
 function loop {
 
 	while [ : ]
 	do
+		clean
     		sync
     		echo "Done! next copy in $DELAY_S sec."	
     		sleep $DELAY_S
