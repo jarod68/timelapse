@@ -1,7 +1,7 @@
 #! /bin/bash
 
 # Configuration :
-SAVE_PATH="./capture"
+SAVE_PATH="//capture"
 DELAY_S=30
 FILE_PREFIX="street"
 

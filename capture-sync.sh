@@ -1,12 +1,15 @@
 #! /bin/bash
 
 # Configuration :
-LOCAL_PATH="./capture"
+LOCAL_PATH="//capture"
 DISTANT_PATH="//synology/capture/"
 DELAY_S=7200
 
 REAL_LOCAL_PATH=`realpath "$LOCAL_PATH"`
 REAL_DISTANT_PATH=`realpath "$DISTANT_PATH"`
+
+LOOP=0
+CLEAN=0
 
 function sync {
 
@@ -23,19 +26,23 @@ function loop {
 
 	while [ : ]
 	do
-		clean
-    		sync
+		if [ "$CLEAN" -eq 1 ]; then
+			clean
+    		fi
+		sync
     		echo "Done! next copy in $DELAY_S sec."	
     		sleep $DELAY_S
 	done
 }
 
-LOOP=0
 
-while getopts ":l" opt; do
+while getopts ":lc" opt; do
   case $opt in
     l)
       echo "Loop mode is ON" ; LOOP=1 
+      ;;
+    c)
+      echo "Cleaning is ON" ; CLEAN=1
       ;;
     \?)
       echo "Invalid option: -$OPTARG" 
@@ -45,7 +52,10 @@ done
 
 if [ "$LOOP" -eq 1 ]; then
 	 loop
-else 
+else
+	if [ "$CLEAN" -eq 1 ]; then
+        	clean
+        fi
 	sync
 	echo "Done!"
 fi
