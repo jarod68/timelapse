@@ -1,22 +1,69 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-       <head>
-			<script src="jquery-1.11.2.min.js"></script>
-			<script src="jquery.fs.zoomer.js"></script>
-			<link href="jquery.fs.zoomer.css" rel="stylesheet">
-			<title>Camera</title>
-       </head>
+<head>
 
-       <body>
-		   <h1>Street</h1>                
-			<div class="viewer" style="height: 500px; width: 100%;">
-				<img src="capture.jpg">
+	<!-- Zoomer -->
+	<script src="./js/jquery-1.11.2.min.js"></script>
+	<script src="./js/jquery.fs.zoomer.js"></script>
+	<link href="./js/jquery.fs.zoomer.css" rel="stylesheet">
+
+	<!-- Bootstrap -->	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+	<title>Camera</title>
+
+	<script>
+	function startLoadImg() {
+		$(".viewer").zoomer('load', 'capture.jpg');
+		setTimeout(startLoadImg, 10000);
+	}
+	$(document).ready(function() {
+		$(".viewer").zoomer();
+		startLoadImg();
+	});
+	</script>
+
+</head>
+
+<body>
+	<div>
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Project name</a>
+				</div>
+				<div id="navbar" class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="#">Home</a></li>
+						<li><a href="#about">About</a></li>
+						<li><a href="#contact">Contact</a></li>
+					</ul>
+				</div><!--/.nav-collapse -->
 			</div>
-			<script>
-				$(document).ready(function() {
-					$(".viewer").zoomer();
-				});
-			</script>
-       </body>
+		</nav>
+
+		<div class="container" style="margin: 30px">
+			<h1 id="title">Street</h1>
+			<div class="jumbotron">
+
+				<div class="viewer" style="height: 500px; width: 100%;">
+					<img id="capture" src="capture.jpg" alt="no image" style="height: 500px; width: 100%;">
+				</div>
+				
+			</div>
+
+		</div><!-- /.container -->
+
+	</body>
+
+</body>
 
 </html>
