@@ -2,7 +2,7 @@
 
 # Configuration :
 SAVE_PATH="//capture"
-DELAY_S=20
+DELAY_S=10
 FILE_PREFIX="street"
 INSTANT_SNAPSHOT_FILENAME="//var/www/capture.jpg"
 

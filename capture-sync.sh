@@ -3,7 +3,7 @@
 # Configuration :
 LOCAL_PATH="//capture"
 DISTANT_PATH="//synology/capture/"
-DELAY_S=7200
+DELAY_S=9000
 
 REAL_LOCAL_PATH=`realpath "$LOCAL_PATH"`
 REAL_DISTANT_PATH=`realpath "$DISTANT_PATH"`
