@@ -11,7 +11,8 @@
 
 	<script>
 	function startLoadImg() {
-		$(".viewer").zoomer('load', 'capture.jpg');
+
+		$(".viewer").zoomer('load', 'capture.jpg?' + new Date().getTime());
 		setTimeout(startLoadImg, 10000);
 	}
 	$(document).ready(function() {
@@ -55,7 +56,7 @@
 			<span class="label label-info">Copyright 2015 - Content is stricly confidential</span>
 		</div><!-- /.container -->
 
-		
+
 		<!-- Bootstrap -->	
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
